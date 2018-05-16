@@ -7,3 +7,5 @@ pip install nltk
 do
 >>> nltk.download()
 for the first time
+
+pip install panda
