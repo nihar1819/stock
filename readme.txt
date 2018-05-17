@@ -9,3 +9,5 @@ do
 for the first time
 
 pip install panda
+pip install datautil
+pip install xlrd
