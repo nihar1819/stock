@@ -7,9 +7,8 @@ import os
 
 
 def get_yesterday_str(format='%d_%m_%Y'):
-    if datetime.now().weekday() == 0:
+    if datetime.now().weekday() == 0 and (datetime.now().time().hour < 15 and datetime.now().minute < 30):
         date_str = (date.today() - timedelta(3)).strftime(format)
-        print datetime.now().weekday()
     elif (datetime.now().time().hour == 15 and datetime.now().minute > 30) or datetime.now().time().hour > 15:
         date_str = (date.today()).strftime(format)
     else:

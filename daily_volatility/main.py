@@ -39,8 +39,13 @@ def combine_daily_volatility_and_nifty100():
 
 def get_daily_volatity():
     df = combine_daily_volatility_and_nifty100()
-    df = df.sort_values(['daily_percent%'],ascending=[0])
-    print df[['Symbol', 'daily_percent%', 'yearly %']][df['daily_percent%']>1.90]
+    df = df.sort_values(['daily_percent%'], ascending=[0])
+    print df[['Symbol', 'daily_percent%', 'yearly %']][df['daily_percent%'] > 1.90]
+
+    yesterday_str = get_csv.get_yesterday_str()
+    file_path = r"./output/{}_refined.csv".format(yesterday_str)
+    df.to_csv(file_path)
+    return df
 
 
 def main():
