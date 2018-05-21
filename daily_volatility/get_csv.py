@@ -5,8 +5,20 @@ from datetime import datetime
 from datetime import timedelta
 import os
 
-yesterday = (date.today() - timedelta(1)).strftime('%d%m%Y')
-VOLATILITY_FILE_NAME = "CMVOLT_{}.CSV".format(yesterday)
+
+def get_yesterday_str(format='%d_%m_%Y'):
+    if datetime.now().weekday() == 0:
+        date_str = (date.today() - timedelta(3)).strftime(format)
+        print datetime.now().weekday()
+    elif (datetime.now().time().hour == 15 and datetime.now().minute > 30) or datetime.now().time().hour > 15:
+        date_str = (date.today()).strftime(format)
+    else:
+        date_str = (date.today() - timedelta(1)).strftime(format)
+
+    return date_str
+
+
+VOLATILITY_FILE_NAME = "CMVOLT_{}.CSV".format(get_yesterday_str('%d%m%Y'))
 VOLATILITY_FILE_PATH = r"./resources/{}".format(VOLATILITY_FILE_NAME)
 
 volatility_url = r'https://www.nseindia.com/archives/nsccl/volt/{}'.format(VOLATILITY_FILE_NAME)
@@ -24,11 +36,7 @@ hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML,
 
 
 def get_deliverable_file_path():
-    # check if current time is already 3:30 pm or not
-    if (datetime.now().time().hour == 15 and datetime.now().minute > 30) or datetime.now().time().hour > 15:
-        date_str =  (date.today()).strftime('%d_%m_%Y')
-    else:
-        date_str = (date.today() - timedelta(1)).strftime('%d_%m_%Y')
+    date_str = get_yesterday_str()
 
     file_name = "{}_{}.csv".format(date_str,'deleverables')
     file_path = r'./resources/{}'.format(file_name)
@@ -60,3 +68,6 @@ def get_csv():
 
     deliverable_url = r'https://www.nseindia.com/products/content/sec_bhavdata_full.csv'
     download_file(deliverable_url, get_deliverable_file_path())
+
+if __name__ == '__main__':
+    get_deliverable_file_path()

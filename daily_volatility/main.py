@@ -1,21 +1,11 @@
-from urllib2 import Request, URLError, HTTPError
-
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
-import pandas as pd
 import os
-import urllib2,cookielib
+
+import pandas as pd
+
 import get_csv
 
 
 #site= "http://www.nseindia.com/live_market/dynaContent/live_watch/get_quote/getHistoricalData.jsp?symbol=JPASSOCIAT&fromDate=1-JAN-2012&toDate=1-AUG-2012&datePeriod=unselected&hiddDwnld=true"
-
-
-
-
-
-
 
 
 def cleanup():
