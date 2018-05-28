@@ -48,10 +48,10 @@ def get_daily_volatity():
     return df
 
 
-def main():
+def get():
     get_csv.get_csv()
-    get_daily_volatity()
+    return get_daily_volatity()
 
 
 if __name__ == '__main__':
-    main()
+    get()

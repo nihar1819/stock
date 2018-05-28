@@ -7,7 +7,7 @@ import os
 
 
 def get_yesterday_str(format='%d_%m_%Y'):
-    if datetime.now().weekday() == 0 and (datetime.now().time().hour < 15 and datetime.now().minute < 30):
+    if datetime.now().weekday() == 0 and (datetime.now() < datetime.now().replace(hour=18, minute=30, second=0, microsecond=0)):
         date_str = (date.today() - timedelta(3)).strftime(format)
     elif (datetime.now().time().hour == 15 and datetime.now().minute > 30) or datetime.now().time().hour > 15:
         date_str = (date.today()).strftime(format)
@@ -18,13 +18,13 @@ def get_yesterday_str(format='%d_%m_%Y'):
 
 
 VOLATILITY_FILE_NAME = "CMVOLT_{}.CSV".format(get_yesterday_str('%d%m%Y'))
-VOLATILITY_FILE_PATH = r"./resources/{}".format(VOLATILITY_FILE_NAME)
+VOLATILITY_FILE_PATH = r"C:\Users\nsarangi\PycharmProjects\stock\daily_volatility\resources\{}".format(VOLATILITY_FILE_NAME)
 
 volatility_url = r'https://www.nseindia.com/archives/nsccl/volt/{}'.format(VOLATILITY_FILE_NAME)
 
 nifty_100_url = r'https://www.nseindia.com/content/indices/ind_nifty100list.csv'
 nifty_100_file_name = nifty_100_url.split('/')[-1]
-NIFTY_100_FILE_PATH = r"./resources/{}".format(nifty_100_file_name)
+NIFTY_100_FILE_PATH = r"C:\Users\nsarangi\PycharmProjects\stock\daily_volatility\resources\{}".format(nifty_100_file_name)
 
 hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11',
        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -38,7 +38,7 @@ def get_deliverable_file_path():
     date_str = get_yesterday_str()
 
     file_name = "{}_{}.csv".format(date_str,'deleverables')
-    file_path = r'./resources/{}'.format(file_name)
+    file_path = r'C:\Users\nsarangi\PycharmProjects\stock\daily_volatility\resources/{}'.format(file_name)
     return file_path
 
 
@@ -69,4 +69,5 @@ def get_csv():
     download_file(deliverable_url, get_deliverable_file_path())
 
 if __name__ == '__main__':
-    get_deliverable_file_path()
+    get_csv()
+    print get_deliverable_file_path()
